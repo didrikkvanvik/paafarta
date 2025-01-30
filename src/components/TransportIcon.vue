@@ -1,4 +1,3 @@
-
 <template>
   <div
     class="text-black rounded-md flex items-center justify-between px-3 py-1 gap-1"
