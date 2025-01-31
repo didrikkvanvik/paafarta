@@ -49,16 +49,28 @@ function formatTime(isoString: string): string {
           <div class="flex items-center gap-2">
             <TransportIcon
               :transport="departure.transport_mode"
-              :line_number="departure.line_number"
+              :line_name="departure.line_name"
             />
             <p class="text-lg">{{ departure.platform_code }}</p>
           </div>
           <div>
             <p class="text-xl">{{ departure.destination }}</p>
           </div>
-          <div class="text-right">
-            <p class="text-xl">
-              {{ formatTime(departure.expected_departure_time || departure.schedule_departure_time) }}
+          <div class="flex items-center gap-2 justify-end">
+            <div
+              v-if="departure.expected_departure_time"
+              class="animate-pulse h-2 w-2 rounded-full bg-green-500"
+            />
+            <p
+              class="text-xl"
+              :class="{ 'text-green-500': departure.expected_departure_time }"
+            >
+              {{
+                formatTime(
+                  departure.expected_departure_time ||
+                    departure.schedule_departure_time,
+                )
+              }}
             </p>
           </div>
         </li>

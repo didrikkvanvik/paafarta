@@ -19,6 +19,7 @@ export const axiosFetch = async <T>({
       method,
       headers,
       data,
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {

@@ -1,3 +1,5 @@
+import type { TransportMode } from "./shared";
+
 export interface Departure {
   id: string;
   line_number: string;
@@ -29,8 +31,6 @@ export interface Departure {
   is_valid: boolean;
   vehicle_id: string | null;
 }
-
-export type TransportMode = "bus" | "rail";
 
 interface Notice {
   id?: string | null;

@@ -19,7 +19,7 @@
       class="w-5 h-5"
     />
 
-    <p class="text-md !font-bold">{{ line_number }}</p>
+    <p class="text-md !font-bold">{{ line_name }}</p>
   </div>
 </template>
 
@@ -28,6 +28,6 @@ import type { TransportMode } from "@/types/departure";
 
 defineProps<{
   transport: TransportMode;
-  line_number: string;
+  line_name: string;
 }>();
 </script>

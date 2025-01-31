@@ -9,6 +9,9 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  define: {
+    'process.env': {},
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -20,6 +23,11 @@ export default defineConfig({
         target: 'https://api.kolumbus.no',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
+        configure: (proxy, options) => {
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            console.log('Proxying request:', req.url);
+          });
+        },
       },
     },
   },

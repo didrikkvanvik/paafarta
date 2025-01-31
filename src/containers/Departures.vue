@@ -39,10 +39,10 @@ const departuresByStation = computed(() => {
   if (!items.length) return new Map<string, Departure[]>();
 
   const filteredDepartures = items.filter((departure) => {
-    const time = departure.expected_departure_time || departure.schedule_departure_time;
+    const time =
+      departure.expected_departure_time || departure.schedule_departure_time;
     const isLessThanFiveMinutesInThePast =
-      new Date(time) <
-      new Date(new Date().getTime() - 5 * 60 * 1000);
+      new Date(time) < new Date(new Date().getTime() - 5 * 60 * 1000);
     return !isLessThanFiveMinutesInThePast;
   });
 
@@ -58,9 +58,7 @@ const departuresByStation = computed(() => {
         const timeA = a.expected_departure_time || a.schedule_departure_time;
         const timeB = b.expected_departure_time || b.schedule_departure_time;
 
-        return (
-          new Date(timeA).getTime() - new Date(timeB).getTime()
-        );
+        return new Date(timeA).getTime() - new Date(timeB).getTime();
       });
       return [name, sortedDepartures];
     }),

@@ -1,6 +1,4 @@
-import type { RailStation } from "@/types/railStation";
-
-export const railStations: RailStation[] = [
+export const railStations = [
   {
     id: "55526e44-a860-4f83-b75a-74f21e695912",
     nsr_id: "NSR:Quay:323",
