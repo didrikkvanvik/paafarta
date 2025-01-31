@@ -8,7 +8,6 @@ defineProps<{
   departures: Departure[];
 }>();
 
-
 function formatTime(isoString: string): string {
   const date = new Date(isoString);
   const isLessThanTenMinutesAndFuture =

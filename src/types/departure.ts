@@ -32,7 +32,6 @@ export interface Departure {
 
 export type TransportMode = "bus" | "rail";
 
-
 interface Notice {
   id?: string | null;
   external_id?: string | null;

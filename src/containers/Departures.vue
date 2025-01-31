@@ -12,12 +12,7 @@ const stationIds = computed(() =>
 );
 const uris = computed(() => stationIds.value.map((id) => encodeURI(id)));
 
-const {
-  data,
-  isLoading,
-  error,
-  refetch,
-} = useQuery<Departure[], Error>({
+const { data, isLoading, error, refetch } = useQuery<Departure[], Error>({
   queryKey: ["departures", stationIds],
   queryFn: () =>
     axiosFetch<Departure[]>({
@@ -43,7 +38,14 @@ const departuresByStation = computed(() => {
 
   if (!items.length) return new Map<string, Departure[]>();
 
-  const groups = items.reduce((acc, departure) => {
+  const filteredDepartures = items.filter((departure) => {
+    const isLessThanFiveMinutesInThePast =
+      new Date(departure.schedule_departure_time) <
+      new Date(new Date().getTime() - 5 * 60 * 1000);
+    return !isLessThanFiveMinutesInThePast;
+  });
+
+  const groups = filteredDepartures.reduce((acc, departure) => {
     const name = departure.platform_name;
     const existingGroup = acc.get(name) || [];
     return new Map(acc).set(name, [...existingGroup, departure]);
@@ -52,10 +54,13 @@ const departuresByStation = computed(() => {
   const groupsSortedByDepartureTime = new Map(
     Array.from(groups.entries()).map(([name, departures]) => {
       const sortedDepartures = [...departures].sort((a, b) => {
-        return new Date(a.schedule_departure_time).getTime() - new Date(b.schedule_departure_time).getTime();
+        return (
+          new Date(a.schedule_departure_time).getTime() -
+          new Date(b.schedule_departure_time).getTime()
+        );
       });
       return [name, sortedDepartures];
-    })
+    }),
   );
 
   return groupsSortedByDepartureTime;

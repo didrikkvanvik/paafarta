@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ManageStationsModal from "@/components/ManageStationsModal.vue";
 import SearchStations from "@/components/SearchStations.vue";
 import Departures from "@/containers/Departures.vue";
 </script>
@@ -13,5 +14,6 @@ import Departures from "@/containers/Departures.vue";
 
     <SearchStations />
     <Departures />
+    <ManageStationsModal />
   </main>
 </template>
