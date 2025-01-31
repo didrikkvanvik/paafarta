@@ -24,10 +24,18 @@ export interface Departure {
   schedule_departure_time: string; // ISO Date format
   expected_arrival_time: string | null; // Nullable timestamps
   expected_departure_time: string | null;
-  notices: any[]; // If you have a specific notice structure, define it instead of `any[]`
-  creation_time: string; // ISO Date format
+  notices: Notice[];
+  creation_time: string;
   is_valid: boolean;
   vehicle_id: string | null;
 }
 
 export type TransportMode = "bus" | "rail";
+
+
+interface Notice {
+  id?: string | null;
+  external_id?: string | null;
+  text?: string | null;
+  publicCode?: string | null;
+}
