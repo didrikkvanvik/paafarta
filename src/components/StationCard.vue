@@ -58,7 +58,7 @@ function formatTime(isoString: string): string {
           </div>
           <div class="text-right">
             <p class="text-xl">
-              {{ formatTime(departure.schedule_departure_time) }}
+              {{ formatTime(departure.expected_departure_time || departure.schedule_departure_time) }}
             </p>
           </div>
         </li>
